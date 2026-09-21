@@ -13,14 +13,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
-        with:
-          buildozer_version: stable
+      - name: Build APK with official Buildozer Docker image
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/home/user/hostcwd \
+            kivy/buildozer:latest android debug
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: absensi-hbc-apk
-          path: ${{ steps.buildozer.outputs.filename }}
+          path: bin/*.apk
