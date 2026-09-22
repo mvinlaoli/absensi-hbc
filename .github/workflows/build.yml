@@ -15,9 +15,10 @@ jobs:
 
       - name: Build APK with official Buildozer Docker image
         run: |
+          rm -rf .buildozer bin
           yes | docker run --rm -i \
             -v ${{ github.workspace }}:/home/user/hostcwd \
-            kivy/buildozer:latest android debug
+            kivy/buildozer:stable android debug
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
