@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <EditText
+        android:id="@+id/edtNim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="NIM" />
+
+    <EditText
+        android:id="@+id/edtKegiatan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Jenis Kegiatan (bebas, misal: Konser Amal)"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/edtJam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Jam Magang (contoh: 0.5)"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/edtCp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CP (contoh: 1)"
+        android:inputType="number"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btnSimpanJamCp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tambahkan"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/lblStatusJamCp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp" />
+
+</LinearLayout>
