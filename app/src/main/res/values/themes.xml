@@ -6,15 +6,12 @@
         <item name="colorPrimary">@color/hbc_navy</item>
         <item name="colorPrimaryVariant">@color/hbc_navy_dark</item>
         <item name="colorOnPrimary">@color/white</item>
-
         <item name="colorSecondary">@color/hbc_gold</item>
         <item name="colorSecondaryVariant">@color/hbc_gold_dark</item>
         <item name="colorOnSecondary">@color/hbc_navy_dark</item>
-
         <item name="android:colorBackground">?attr/colorSurface</item>
         <item name="colorSurface">@color/dark_surface</item>
         <item name="colorOnSurface">@color/dark_text_primary</item>
-
         <item name="android:statusBarColor">@color/hbc_navy_dark</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
@@ -57,6 +54,11 @@
     </style>
 
     <!-- STYLE TEXT -->
+    <style name="Text.AbsensiHBC">
+        <item name="android:textColor">@color/dark_text_primary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="Text.AbsensiHBC.Title">
         <item name="android:textColor">@color/hbc_gold</item>
         <item name="android:textSize">28sp</item>
