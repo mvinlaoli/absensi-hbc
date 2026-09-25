@@ -57,13 +57,13 @@
     </style>
 
     <!-- STYLE TEXT -->
-    <style name="Text.AbsensiHBC.Title" parent="">
+    <style name="Text.AbsensiHBC.Title">
         <item name="android:textColor">@color/hbc_gold</item>
         <item name="android:textSize">28sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Text.AbsensiHBC.Subtitle" parent="">
+    <style name="Text.AbsensiHBC.Subtitle">
         <item name="android:textColor">@color/dark_text_secondary</item>
         <item name="android:textSize">14sp</item>
     </style>
