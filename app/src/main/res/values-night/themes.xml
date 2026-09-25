@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+\<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.AbsensiHBC" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/hbc_navy</item>
@@ -10,4 +10,7 @@
         <item name="android:statusBarColor">@color/hbc_navy_dark</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
+
+    <style name="Text" parent="Text.AbsensiHBC" />
+
 </resources>
