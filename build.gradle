@@ -30,10 +30,6 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
-
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 dependencies {
@@ -42,10 +38,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.cardview:cardview:1.0.0'
-
-    // OkHttp untuk API
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
-
-    // ZXing untuk scan QR
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 }
