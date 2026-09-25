@@ -9,11 +9,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+        android:theme="@style/Theme.AbsensiHBC"
         android:usesCleartextTraffic="true">
 
+        <!-- Splash (launcher) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +22,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".LoginActivity" android:exported="false" />
+        <activity android:name=".MainActivity" android:exported="false" />
         <activity android:name=".ScanActivity" android:exported="false" />
         <activity android:name=".ManualActivity" android:exported="false" />
         <activity android:name=".JamCpActivity" android:exported="false" />

@@ -49,14 +49,15 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- Tombol Tema -->
+            <!-- Tombol Rekap (ikon kalender) -->
             <ImageButton
-                android:id="@+id/btnTheme"
+                android:id="@+id/btnRekap"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_menu_day"
-                android:contentDescription="Ganti Tema" />
+                android:src="@android:drawable/ic_menu_my_calendar"
+                app:tint="@color/hbc_gold"
+                android:contentDescription="Rekap" />
         </LinearLayout>
 
         <!-- SAPAAN -->
@@ -69,7 +70,7 @@
             android:textStyle="bold"
             android:layout_marginBottom="24dp" />
 
-        <!-- TOMBOL: SCAN -->
+        <!-- CARD SCAN -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardScan"
             android:layout_width="match_parent"
@@ -115,7 +116,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- TOMBOL: MANUAL -->
+        <!-- CARD MANUAL -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardManual"
             android:layout_width="match_parent"
@@ -161,7 +162,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- TOMBOL: JAM & CP -->
+        <!-- CARD JAM & CP -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardJamCp"
             android:layout_width="match_parent"
@@ -212,9 +213,9 @@
             android:id="@+id/lblWeekly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Minggu ini: 0/0 hadir"
+            android:text="Minggu ini: —"
             android:textColor="@color/dark_text_secondary"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:gravity="center" />
 
     </LinearLayout>

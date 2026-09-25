@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="@color/dark_background">
 
-    <!-- HEADER -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,23 +43,21 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- PILIH NAMA (DROPDOWN) -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pilih nama anggota"
+                android:text="Pilih anggota"
                 android:textColor="@color/dark_text_secondary"
                 android:textSize="14sp"
                 android:layout_marginBottom="8dp" />
 
             <Spinner
-                android:id="@+id/spinnerNama"
+                android:id="@+id/spinnerAnggota"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="48dp"
                 android:background="@color/dark_surface"
                 android:layout_marginBottom="16dp" />
 
-            <!-- JENIS KEGIATAN -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +73,6 @@
                 android:background="@color/dark_surface"
                 android:layout_marginBottom="16dp" />
 
-            <!-- JAM -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +93,6 @@
                 android:inputType="numberDecimal"
                 android:layout_marginBottom="16dp" />
 
-            <!-- CP -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,7 +113,6 @@
                 android:inputType="numberDecimal"
                 android:layout_marginBottom="24dp" />
 
-            <!-- STATUS -->
             <TextView
                 android:id="@+id/lblStatusJamCp"
                 android:layout_width="match_parent"
@@ -129,7 +123,6 @@
                 android:gravity="center"
                 android:layout_marginBottom="16dp" />
 
-            <!-- TOMBOL SIMPAN -->
             <Button
                 android:id="@+id/btnSimpanJamCp"
                 android:layout_width="match_parent"

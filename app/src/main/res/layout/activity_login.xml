@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="@color/hbc_navy_dark">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@mipmap/ic_launcher"
+        android:contentDescription="Logo HBC" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="ABSENSI HBC"
+        android:textColor="@color/hbc_gold"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="32dp"
+        android:text="Masuk sebagai Pengurus"
+        android:textColor="@color/dark_text_secondary"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/edtSandi"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:hint="Sandi Pengurus"
+        android:textColorHint="@color/dark_text_secondary"
+        android:textColor="@color/dark_text_primary"
+        android:background="@color/dark_surface"
+        android:padding="16dp"
+        android:inputType="textPassword"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/lblError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/status_alpa"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnMasuk"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="MASUK"
+        android:textColor="@color/hbc_navy_dark"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:backgroundTint="@color/hbc_gold" />
+
+</LinearLayout>
