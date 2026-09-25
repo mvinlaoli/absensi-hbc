@@ -12,7 +12,6 @@
         android:theme="@style/Theme.AbsensiHBC"
         android:usesCleartextTraffic="true">
 
-        <!-- Splash (launcher) -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">

@@ -7,9 +7,9 @@
     android:background="@color/hbc_navy_dark">
 
     <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:src="@mipmap/ic_launcher"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@android:drawable/star_big_on"
         android:contentDescription="Logo HBC" />
 
     <TextView
