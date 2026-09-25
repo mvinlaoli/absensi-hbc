@@ -1,9 +1,7 @@
 package org.hbc.absensihbc
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -23,12 +21,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, JamCpActivity::class.java))
         }
 
-        // Tombol Rekap → buka Google Sheets
-        findViewById<ImageButton>(R.id.btnRekap).setOnClickListener {
-            val url = "https://docs.google.com/spreadsheets/d/1nYchu61_ZknF8Ve3RvLRaNf1kMCi5x9GWUc8HX2ZvwE/edit"
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-        }
-
         loadInfoMinggu()
     }
 
@@ -39,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadInfoMinggu() {
         val lblWeekly = findViewById<TextView>(R.id.lblWeekly)
+        lblWeekly.text = "Memuat..."
         ApiClient.infoMinggu { json ->
             runOnUiThread {
                 if (json != null && json.optBoolean("success")) {

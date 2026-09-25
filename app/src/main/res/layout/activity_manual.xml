@@ -33,79 +33,93 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih anggota"
+                    android:textColor="@color/dark_text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp" />
+
+                <Spinner
+                    android:id="@+id/spinnerAnggota"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/dark_surface"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jenis kegiatan"
+                    android:textColor="@color/dark_text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp" />
+
+                <Spinner
+                    android:id="@+id/spinnerKegiatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/dark_surface"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Status"
+                    android:textColor="@color/dark_text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp" />
+
+                <Spinner
+                    android:id="@+id/spinnerStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/dark_surface"
+                    android:layout_marginBottom="24dp" />
+
+                <TextView
+                    android:id="@+id/lblStatusManual"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/dark_text_secondary"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp" />
+
+                <Button
+                    android:id="@+id/btnSimpanManual"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="SIMPAN STATUS"
+                    android:textColor="@color/hbc_navy_dark"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/hbc_gold" />
+            </LinearLayout>
+        </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pilih anggota"
-                android:textColor="@color/dark_text_secondary"
-                android:textSize="14sp"
-                android:layout_marginBottom="8dp" />
-
-            <Spinner
-                android:id="@+id/spinnerAnggota"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@color/dark_surface"
-                android:layout_marginBottom="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Jenis kegiatan"
-                android:textColor="@color/dark_text_secondary"
-                android:textSize="14sp"
-                android:layout_marginBottom="8dp" />
-
-            <Spinner
-                android:id="@+id/spinnerKegiatan"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@color/dark_surface"
-                android:layout_marginBottom="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Status"
-                android:textColor="@color/dark_text_secondary"
-                android:textSize="14sp"
-                android:layout_marginBottom="8dp" />
-
-            <Spinner
-                android:id="@+id/spinnerStatus"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@color/dark_surface"
-                android:layout_marginBottom="24dp" />
-
-            <TextView
-                android:id="@+id/lblStatusManual"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/dark_text_secondary"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:layout_marginBottom="16dp" />
-
-            <Button
-                android:id="@+id/btnSimpanManual"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="SIMPAN STATUS"
-                android:textColor="@color/hbc_navy_dark"
-                android:textStyle="bold"
-                android:backgroundTint="@color/hbc_gold" />
-        </LinearLayout>
-    </ScrollView>
+    </FrameLayout>
 </LinearLayout>

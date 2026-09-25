@@ -1,9 +1,11 @@
 package org.hbc.absensihbc
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -16,6 +18,7 @@ class ManualActivity : AppCompatActivity() {
     private lateinit var spinnerKegiatan: Spinner
     private lateinit var spinnerStatus: Spinner
     private lateinit var lblStatus: TextView
+    private lateinit var progressBar: ProgressBar
     private var listAnggota = mutableListOf<JSONObject>()
     private var listKegiatan = mutableListOf<String>()
 
@@ -27,11 +30,14 @@ class ManualActivity : AppCompatActivity() {
         spinnerKegiatan = findViewById(R.id.spinnerKegiatan)
         spinnerStatus = findViewById(R.id.spinnerStatus)
         lblStatus = findViewById(R.id.lblStatusManual)
+        progressBar = findViewById(R.id.progressBar)
 
-        // Tombol X → kembali
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
             finish()
         }
+
+        // Tampilkan loading
+        progressBar.visibility = View.VISIBLE
 
         loadAnggota()
         loadKegiatan()
@@ -72,12 +78,13 @@ class ManualActivity : AppCompatActivity() {
     private fun loadAnggota() {
         ApiClient.daftarAnggota { list ->
             runOnUiThread {
+                progressBar.visibility = View.GONE
                 if (list.isNotEmpty()) {
                     listAnggota = list.toMutableList()
                     val namaList = list.map { "${it.optString("nama")} (${it.optString("nim")})" }
                     spinnerAnggota.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, namaList)
                 } else {
-                    Toast.makeText(this, "Data anggota kosong", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Gagal load anggota, coba lagi", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -113,6 +120,8 @@ class ManualActivity : AppCompatActivity() {
                         if (json != null && json.optBoolean("success")) {
                             Toast.makeText(this, "Ditambahkan", Toast.LENGTH_SHORT).show()
                             loadKegiatan()
+                        } else {
+                            Toast.makeText(this, "Gagal tambah kegiatan", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

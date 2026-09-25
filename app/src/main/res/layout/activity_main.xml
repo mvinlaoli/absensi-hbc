@@ -22,9 +22,10 @@
 
             <ImageView
                 android:layout_width="48dp"
-    android:layout_height="48dp"
-    android:src="@android:drawable/star_big_on"
-    android:contentDescription="Logo HBC" />
+                android:layout_height="48dp"
+                android:src="@android:drawable/star_big_on"
+                android:contentDescription="Logo HBC" />
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -47,16 +48,6 @@
                     android:textColor="@color/dark_text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>
-
-            <!-- Tombol Rekap (ikon kalender) -->
-            <ImageButton
-                android:id="@+id/btnRekap"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_menu_my_calendar"
-                app:tint="@color/hbc_gold"
-                android:contentDescription="Rekap" />
         </LinearLayout>
 
         <!-- SAPAAN -->
@@ -212,7 +203,7 @@
             android:id="@+id/lblWeekly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Minggu ini: —"
+            android:text="Memuat..."
             android:textColor="@color/dark_text_secondary"
             android:textSize="13sp"
             android:gravity="center" />
