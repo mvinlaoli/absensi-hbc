@@ -7,12 +7,12 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
-import org.json.JSONObject
+import org.json.JSONObjec
 import java.io.IOException
 
 object ApiClient {
     // Ganti URL ini kalau nanti deploy ulang Web App dan URL-nya berubah
-    const val BASE_URL = "https://script.google.com/macros/s/AKfycbxEv4u22GObE15eriubMUkXclat1mcaDYc1WihFBcc8VVKUyKZ7JDj1TUE051N4m73k/exec"
+    const val BASE_URL ="https://script.google.com/macros/s/AKfycbxTtd6lAG2_4jhuuWCLaQwlGHpxzTnG9fB-LbypQy1ssaOqouyP63Y4vr9vBh4HfWT5Hw/exec"
     const val API_SECRET = "hbc2026"
 
     private val client = OkHttpClient()

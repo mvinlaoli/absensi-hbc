@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nama aplikasi -->
+    <string name="app_name">Absensi HBC</string>
+
+    <!-- Splash Screen -->
+    <string name="splash_tagline">Harapan Bangsa Choir</string>
+
+    <!-- Login -->
+    <string name="login_title">ABSENSI HBC</string>
+    <string name="login_subtitle">Masuk sebagai Pengurus</string>
+    <string name="login_hint_password">Sandi Pengurus</string>
+    <string name="login_button">MASUK</string>
+    <string name="login_error">Sandi salah. Coba lagi.</string>
+    <string name="login_empty">Sandi tidak boleh kosong</string>
+
+    <!-- Menu Utama -->
+    <string name="menu_greeting">Halo, Pengurus</string>
+    <string name="menu_scan">Scan kehadiran</string>
+    <string name="menu_manual">Input manual</string>
+    <string name="menu_jamcp">Jam magang &amp; CP</string>
+    <string name="menu_weekly">Minggu ini: %1$d/%2$d hadir</string>
+    <string name="menu_logout">Keluar</string>
+    <string name="menu_theme">Ganti Tema</string>
+
+    <!-- Scan -->
+    <string name="scan_title">Scan kehadiran</string>
+    <string name="scan_jenis_kegiatan">Jenis kegiatan</string>
+    <string name="scan_instruction">Arahkan kamera ke QR Code anggota</string>
+    <string name="scan_processing">Memproses…</string>
+    <string name="scan_success">Hadir: %1$s</string>
+    <string name="scan_failed">Gagal: %1$s</string>
+
+    <!-- Manual -->
+    <string name="manual_title">Input manual</string>
+    <string name="manual_hint_nim">Cari NIM atau nama</string>
+    <string name="manual_jenis_kegiatan">Jenis kegiatan</string>
+    <string name="manual_status">Status</string>
+    <string name="manual_save">Simpan status</string>
+    <string name="manual_success">%1$s tercatat untuk %2$s</string>
+
+    <!-- Jam Magang & CP -->
+    <string name="jamcp_title">Jam magang &amp; CP</string>
+    <string name="jamcp_hint_nim">Cari NIM atau nama</string>
+    <string name="jamcp_total">Total sekarang: %1$s jam · %2$s CP</string>
+    <string name="jamcp_jenis_kegiatan">Jenis kegiatan</string>
+    <string name="jamcp_jam">Jam magang</string>
+    <string name="jamcp_cp">CP</string>
+    <string name="jamcp_save">Tambahkan</string>
+    <string name="jamcp_success">Tersimpan: %1$s (+%2$s jam, +%3$s CP)</string>
+
+    <!-- Status -->
+    <string name="status_hadir">Hadir</string>
+    <string name="status_izin">Izin</string>
+    <string name="status_sakit">Sakit</string>
+    <string name="status_alpa">Alpa</string>
+</resources>

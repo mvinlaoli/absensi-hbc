@@ -1,50 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:background="@color/dark_background">
 
-    <EditText
-        android:id="@+id/edtNim"
+    <!-- HEADER -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="NIM" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/hbc_navy"
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/edtKegiatan"
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="@color/hbc_gold"
+            android:contentDescription="Kembali" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Jam magang &amp; CP"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Jenis Kegiatan (bebas, misal: Konser Amal)"
-        android:layout_marginTop="8dp" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/edtJam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Jam Magang (contoh: 0.5)"
-        android:inputType="numberDecimal"
-        android:layout_marginTop="8dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-    <EditText
-        android:id="@+id/edtCp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="CP (contoh: 1)"
-        android:inputType="number"
-        android:layout_marginTop="8dp" />
+            <!-- INPUT NIM -->
+            <EditText
+                android:id="@+id/edtNim"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="Cari NIM atau nama"
+                android:textColorHint="@color/dark_text_secondary"
+                android:textColor="@color/dark_text_primary"
+                android:background="@color/dark_surface"
+                android:padding="16dp"
+                android:inputType="text"
+                android:layout_marginBottom="16dp" />
 
-    <Button
-        android:id="@+id/btnSimpanJamCp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tambahkan"
-        android:layout_marginTop="16dp" />
+            <!-- KARTU TOTAL -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/dark_surface"
+                app:cardCornerRadius="12dp"
+                android:visibility="gone">
 
-    <TextView
-        android:id="@+id/lblStatusJamCp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
+                    <TextView
+                        android:id="@+id/lblNamaJamCp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nama Anggota"
+                        android:textColor="@color/hbc_gold"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/lblTotalJamCp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total sekarang: 0 jam · 0 CP"
+                        android:textColor="@color/dark_text_secondary"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- JENIS KEGIATAN -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis kegiatan"
+                android:textColor="@color/dark_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/edtKegiatan"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/dark_surface"
+                android:layout_marginBottom="16dp" />
+
+            <!-- JAM -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jam magang"
+                android:textColor="@color/dark_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/edtJam"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="Contoh: 1.5"
+                android:textColorHint="@color/dark_text_secondary"
+                android:textColor="@color/dark_text_primary"
+                android:background="@color/dark_surface"
+                android:padding="16dp"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="16dp" />
+
+            <!-- CP -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CP"
+                android:textColor="@color/dark_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/edtCp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="Contoh: 0.5"
+                android:textColorHint="@color/dark_text_secondary"
+                android:textColor="@color/dark_text_primary"
+                android:background="@color/dark_surface"
+                android:padding="16dp"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="24dp" />
+
+            <!-- STATUS -->
+            <TextView
+                android:id="@+id/lblStatusJamCp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/dark_text_secondary"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <!-- TOMBOL SIMPAN -->
+            <Button
+                android:id="@+id/btnSimpanJamCp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="TAMBAHKAN"
+                android:textColor="@color/hbc_navy_dark"
+                android:textStyle="bold"
+                android:backgroundTint="@color/hbc_gold" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

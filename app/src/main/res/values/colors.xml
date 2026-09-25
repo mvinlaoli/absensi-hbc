@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================ -->
+    <!-- WARNA DARI LOGO HBC                          -->
+    <!-- ============================================ -->
+    <color name="hbc_navy">#1E3A8A</color>
+    <color name="hbc_navy_dark">#0F172A</color>
+    <color name="hbc_navy_light">#3B82F6</color>
+    <color name="hbc_gold">#FBBF24</color>
+    <color name="hbc_gold_dark">#D97706</color>
+    <color name="hbc_gold_light">#FDE68A</color>
+
+    <!-- ============================================ -->
+    <!-- WARNA DARK MODE                              -->
+    <!-- ============================================ -->
+    <color name="dark_background">#0F172A</color>
+    <color name="dark_surface">#1E293B</color>
+    <color name="dark_surface_variant">#334155</color>
+    <color name="dark_text_primary">#FFFFFF</color>
+    <color name="dark_text_secondary">#9CA3AF</color>
+    <color name="dark_divider">#334155</color>
+
+    <!-- ============================================ -->
+    <!-- WARNA LIGHT MODE                             -->
+    <!-- ============================================ -->
+    <color name="light_background">#F8FAFC</color>
+    <color name="light_surface">#FFFFFF</color>
+    <color name="light_surface_variant">#F1F5F9</color>
+    <color name="light_text_primary">#0F172A</color>
+    <color name="light_text_secondary">#64748B</color>
+    <color name="light_divider">#E2E8F0</color>
+
+    <!-- ============================================ -->
+    <!-- WARNA STATUS                                 -->
+    <!-- ============================================ -->
+    <color name="status_hadir">#10B981</color>
+    <color name="status_izin">#F59E0B</color>
+    <color name="status_sakit">#3B82F6</color>
+    <color name="status_alpa">#EF4444</color>
+
+    <!-- ============================================ -->
+    <!-- WARNA UMUM                                   -->
+    <!-- ============================================ -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+</resources>

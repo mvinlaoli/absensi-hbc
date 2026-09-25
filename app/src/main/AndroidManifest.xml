@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="org.hbc.absensihbc">
 
+    <!-- IZIN -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
     <application
         android:allowBackup="true"
-        android:label="Absensi HBC"
-        android:theme="@style/Theme.Material3.DayNight">
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AbsensiHBC"
+        android:usesCleartextTraffic="true">
 
         <activity
             android:name=".MainActivity"
@@ -23,12 +27,5 @@
         <activity android:name=".ScanActivity" android:exported="false" />
         <activity android:name=".ManualActivity" android:exported="false" />
         <activity android:name=".JamCpActivity" android:exported="false" />
-
-        <activity
-            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-            android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation"
-            android:exported="false" />
     </application>
-
 </manifest>
