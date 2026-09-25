@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         }
 
-        // Load info minggu ini
         loadInfoMinggu()
     }
 
