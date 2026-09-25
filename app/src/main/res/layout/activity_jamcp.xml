@@ -44,53 +44,21 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- INPUT NIM -->
-            <EditText
-                android:id="@+id/edtNim"
+            <!-- PILIH NAMA (DROPDOWN) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pilih nama anggota"
+                android:textColor="@color/dark_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spinnerNama"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:hint="Cari NIM atau nama"
-                android:textColorHint="@color/dark_text_secondary"
-                android:textColor="@color/dark_text_primary"
                 android:background="@color/dark_surface"
-                android:padding="16dp"
-                android:inputType="text"
                 android:layout_marginBottom="16dp" />
-
-            <!-- KARTU TOTAL -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardTotal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/dark_surface"
-                app:cardCornerRadius="12dp"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/lblNamaJamCp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nama Anggota"
-                        android:textColor="@color/hbc_gold"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/lblTotalJamCp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Total sekarang: 0 jam · 0 CP"
-                        android:textColor="@color/dark_text_secondary"
-                        android:textSize="14sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
 
             <!-- JENIS KEGIATAN -->
             <TextView
@@ -102,7 +70,7 @@
                 android:layout_marginBottom="8dp" />
 
             <Spinner
-                android:id="@+id/edtKegiatan"
+                android:id="@+id/spinnerKegiatan"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@color/dark_surface"
