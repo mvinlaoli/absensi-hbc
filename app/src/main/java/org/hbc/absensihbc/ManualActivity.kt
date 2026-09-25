@@ -3,6 +3,7 @@ package org.hbc.absensihbc
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -26,6 +27,11 @@ class ManualActivity : AppCompatActivity() {
         spinnerKegiatan = findViewById(R.id.spinnerKegiatan)
         spinnerStatus = findViewById(R.id.spinnerStatus)
         lblStatus = findViewById(R.id.lblStatusManual)
+
+        // Tombol X → kembali
+        findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
 
         loadAnggota()
         loadKegiatan()
@@ -70,6 +76,8 @@ class ManualActivity : AppCompatActivity() {
                     listAnggota = list.toMutableList()
                     val namaList = list.map { "${it.optString("nama")} (${it.optString("nim")})" }
                     spinnerAnggota.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, namaList)
+                } else {
+                    Toast.makeText(this, "Data anggota kosong", Toast.LENGTH_SHORT).show()
                 }
             }
         }

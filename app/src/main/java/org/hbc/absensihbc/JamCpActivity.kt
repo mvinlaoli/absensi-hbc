@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -29,6 +30,11 @@ class JamCpActivity : AppCompatActivity() {
         edtJam = findViewById(R.id.edtJam)
         edtCp = findViewById(R.id.edtCp)
         lblStatus = findViewById(R.id.lblStatusJamCp)
+
+        // Tombol X → kembali
+        findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
 
         loadAnggota()
         loadKegiatan()
@@ -73,6 +79,8 @@ class JamCpActivity : AppCompatActivity() {
                     listAnggota = list.toMutableList()
                     val namaList = list.map { "${it.optString("nama")} (${it.optString("nim")})" }
                     spinnerAnggota.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, namaList)
+                } else {
+                    Toast.makeText(this, "Data anggota kosong", Toast.LENGTH_SHORT).show()
                 }
             }
         }

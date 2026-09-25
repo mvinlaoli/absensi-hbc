@@ -15,13 +15,20 @@ object ApiClient {
 
     private val client = OkHttpClient()
 
-    // ---------- LOOKUP NIM (GET) ----------
-    fun lookup(nim: String, onResult: (JSONObject?) -> Unit) {
-        val url = "$BASE_URL?action=lookup&nim=$nim&secret=$API_SECRET"
+    // ---------- DAFTAR ANGGOTA (GET) ----------
+    fun daftarAnggota(onResult: (List<JSONObject>) -> Unit) {
+        val url = "$BASE_URL?action=daftarAnggota&secret=$API_SECRET"
         client.newCall(Request.Builder().url(url).build()).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) = onResult(null)
+            override fun onFailure(call: Call, e: IOException) = onResult(emptyList())
             override fun onResponse(call: Call, response: Response) {
-                onResult(response.body?.string()?.let { JSONObject(it) })
+                val body = response.body?.string() ?: run { onResult(emptyList()); return }
+                val json = try { JSONObject(body) } catch (ex: Exception) { onResult(emptyList()); return }
+                val arr = json.optJSONArray("daftar")
+                val list = mutableListOf<JSONObject>()
+                if (arr != null) {
+                    for (i in 0 until arr.length()) list.add(arr.getJSONObject(i))
+                }
+                onResult(list)
             }
         })
     }
@@ -47,25 +54,7 @@ object ApiClient {
         })
     }
 
-    // ---------- DAFTAR ANGGOTA (GET) — BARU ----------
-    fun daftarAnggota(onResult: (List<JSONObject>) -> Unit) {
-        val url = "$BASE_URL?action=daftarAnggota&secret=$API_SECRET"
-        client.newCall(Request.Builder().url(url).build()).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) = onResult(emptyList())
-            override fun onResponse(call: Call, response: Response) {
-                val body = response.body?.string() ?: run { onResult(emptyList()); return }
-                val json = try { JSONObject(body) } catch (ex: Exception) { onResult(emptyList()); return }
-                val arr = json.optJSONArray("daftar")
-                val list = mutableListOf<JSONObject>()
-                if (arr != null) {
-                    for (i in 0 until arr.length()) list.add(arr.getJSONObject(i))
-                }
-                onResult(list)
-            }
-        })
-    }
-
-    // ---------- INFO MINGGU INI (GET) — BARU ----------
+    // ---------- INFO MINGGU (GET) ----------
     fun infoMinggu(onResult: (JSONObject?) -> Unit) {
         val url = "$BASE_URL?action=infoMinggu&secret=$API_SECRET"
         client.newCall(Request.Builder().url(url).build()).enqueue(object : Callback {
@@ -78,7 +67,7 @@ object ApiClient {
         })
     }
 
-    // ---------- TAMBAH KEGIATAN BARU (POST) — BARU ----------
+    // ---------- TAMBAH KEGIATAN (POST) ----------
     fun tambahKegiatan(nama: String, kategori: String, onResult: (JSONObject?) -> Unit) {
         postForm(
             mapOf(
