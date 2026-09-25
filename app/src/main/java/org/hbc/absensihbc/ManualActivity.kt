@@ -14,9 +14,17 @@ class ManualActivity : AppCompatActivity() {
         setContentView(R.layout.activity_manual)
 
         val edtNim = findViewById<EditText>(R.id.edtNim)
-        val edtKegiatan = findViewById<EditText>(R.id.edtKegiatan)
+        val spinnerKegiatan = findViewById<Spinner>(R.id.spinnerKegiatan)
         val spinnerStatus = findViewById<Spinner>(R.id.spinnerStatus)
         val lblStatus = findViewById<TextView>(R.id.lblStatusManual)
+
+        val defaultKegiatan = listOf("Latihan HBC", "Natal", "Wisuda")
+        spinnerKegiatan.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, defaultKegiatan)
+        ApiClient.daftarKegiatan { list ->
+            if (list.isNotEmpty()) runOnUiThread {
+                spinnerKegiatan.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list)
+            }
+        }
 
         spinnerStatus.adapter = ArrayAdapter(
             this, android.R.layout.simple_spinner_dropdown_item,
@@ -25,11 +33,11 @@ class ManualActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btnSimpanManual).setOnClickListener {
             val nim = edtNim.text.toString().trim()
-            val kegiatan = edtKegiatan.text.toString().trim()
+            val kegiatan = spinnerKegiatan.selectedItem?.toString() ?: ""
             val status = spinnerStatus.selectedItem?.toString() ?: "Izin"
 
             if (nim.isEmpty() || kegiatan.isEmpty()) {
-                lblStatus.text = "NIM dan Jenis Kegiatan wajib diisi"
+                lblStatus.text = "NIM wajib diisi"
                 return@setOnClickListener
             }
 
