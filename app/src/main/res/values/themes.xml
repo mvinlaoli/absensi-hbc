@@ -10,6 +10,14 @@
         <item name="android:textColorSecondary">@color/dark_text_secondary</item>
         <item name="android:statusBarColor">@color/hbc_navy_dark</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimation</item>
+    </style>
+
+    <style name="WindowAnimation">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_left</item>
     </style>
 
     <style name="Text.AbsensiHBC">
@@ -29,5 +37,4 @@
         <item name="android:textColor">@color/dark_text_secondary</item>
         <item name="android:textSize">14sp</item>
     </style>
-
 </resources>

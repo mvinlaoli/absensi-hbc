@@ -15,7 +15,6 @@ object ApiClient {
 
     private val client = OkHttpClient()
 
-    // ---------- DAFTAR ANGGOTA (GET) ----------
     fun daftarAnggota(onResult: (List<JSONObject>) -> Unit) {
         val url = "$BASE_URL?action=daftarAnggota&secret=$API_SECRET"
         client.newCall(Request.Builder().url(url).build()).enqueue(object : Callback {
@@ -33,7 +32,6 @@ object ApiClient {
         })
     }
 
-    // ---------- DAFTAR KEGIATAN (GET) ----------
     fun daftarKegiatan(onResult: (List<String>) -> Unit) {
         val url = "$BASE_URL?action=daftarKegiatan&secret=$API_SECRET"
         client.newCall(Request.Builder().url(url).build()).enqueue(object : Callback {
@@ -54,7 +52,6 @@ object ApiClient {
         })
     }
 
-    // ---------- INFO MINGGU (GET) ----------
     fun infoMinggu(onResult: (JSONObject?) -> Unit) {
         val url = "$BASE_URL?action=infoMinggu&secret=$API_SECRET"
         client.newCall(Request.Builder().url(url).build()).enqueue(object : Callback {
@@ -67,7 +64,19 @@ object ApiClient {
         })
     }
 
-    // ---------- TAMBAH KEGIATAN (POST) ----------
+    // ---------- BARU: STATISTIK BULANAN ----------
+    fun statistikBulanan(onResult: (JSONObject?) -> Unit) {
+        val url = "$BASE_URL?action=statistikBulanan&secret=$API_SECRET"
+        client.newCall(Request.Builder().url(url).build()).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) = onResult(null)
+            override fun onResponse(call: Call, response: Response) {
+                val text = response.body?.string()
+                val json = try { if (text != null) JSONObject(text) else null } catch (ex: Exception) { null }
+                onResult(json)
+            }
+        })
+    }
+
     fun tambahKegiatan(nama: String, kategori: String, onResult: (JSONObject?) -> Unit) {
         postForm(
             mapOf(
@@ -79,7 +88,6 @@ object ApiClient {
         )
     }
 
-    // ---------- CATAT ABSENSI (POST) ----------
     fun catatAbsensi(nim: String, jenisKegiatan: String, status: String, onResult: (JSONObject?) -> Unit) {
         postForm(
             mapOf(
@@ -92,7 +100,6 @@ object ApiClient {
         )
     }
 
-    // ---------- CATAT JAM & CP (POST) ----------
     fun catatJamCp(nim: String, jenisKegiatan: String, jam: Double, cp: Int, onResult: (JSONObject?) -> Unit) {
         postForm(
             mapOf(
@@ -106,7 +113,6 @@ object ApiClient {
         )
     }
 
-    // ---------- HELPER: POST Form ----------
     private fun postForm(params: Map<String, String>, onResult: (JSONObject?) -> Unit) {
         val builder = FormBody.Builder()
         params.forEach { (k, v) -> builder.add(k, v) }

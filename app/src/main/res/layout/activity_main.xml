@@ -48,9 +48,17 @@
                     android:textColor="@color/dark_text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btnRekap"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_my_calendar"
+                app:tint="@color/hbc_gold"
+                android:contentDescription="Rekap" />
         </LinearLayout>
 
-        <!-- SAPAAN -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -207,6 +215,20 @@
             android:textColor="@color/dark_text_secondary"
             android:textSize="13sp"
             android:gravity="center" />
+
+        <!-- STATISTIK BULAN INI -->
+        <TextView
+            android:id="@+id/lblStatistik"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:background="@color/dark_surface"
+            android:text="Memuat statistik..."
+            android:textColor="@color/dark_text_primary"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp" />
 
     </LinearLayout>
 </ScrollView>

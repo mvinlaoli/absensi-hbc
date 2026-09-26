@@ -7,12 +7,14 @@
     android:background="@color/hbc_navy_dark">
 
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@android:drawable/star_big_on"
+        android:id="@+id/logoSplash"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@mipmap/ic_launcher"
         android:contentDescription="Logo HBC" />
 
     <TextView
+        android:id="@+id/titleSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -22,6 +24,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/subtitleSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
