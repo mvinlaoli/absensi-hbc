@@ -32,7 +32,23 @@ class ScanActivity : AppCompatActivity() {
 
         loadKegiatan()
 
+        // Ketika dropdown berubah → cek apakah pilih "Tambah Kegiatan Baru"
+        spinnerKegiatan.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
+                val selected = spinnerKegiatan.selectedItem?.toString() ?: return
+                if (selected == "+ Tambah Kegiatan Baru") {
+                    showTambahKegiatanDialog()
+                }
+            }
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
+        }
+
         findViewById<Button>(R.id.btnMulaiScan).setOnClickListener {
+            val kegiatan = spinnerKegiatan.selectedItem?.toString() ?: "Latihan HBC"
+            if (kegiatan == "+ Tambah Kegiatan Baru") {
+                Toast.makeText(this, "Pilih kegiatan dulu", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             IntentIntegrator(this).setOrientationLocked(false).initiateScan()
         }
     }
@@ -89,20 +105,29 @@ class ScanActivity : AppCompatActivity() {
                 val nama = input.text.toString().trim()
                 if (nama.isEmpty()) {
                     Toast.makeText(this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                    // Reset ke default
+                    spinnerKegiatan.setSelection(0)
                     return@setPositiveButton
                 }
                 ApiClient.tambahKegiatan(nama, "Acara") { json ->
                     runOnUiThread {
                         if (json != null && json.optBoolean("success")) {
                             Toast.makeText(this, "Kegiatan ditambahkan", Toast.LENGTH_SHORT).show()
+                            // Reload dropdown — kegiatan baru akan muncul
                             loadKegiatan()
                         } else {
-                            Toast.makeText(this, "Gagal tambah kegiatan", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Gagal: ${json?.optString("message")}", Toast.LENGTH_SHORT).show()
+                            spinnerKegiatan.setSelection(0)
                         }
                     }
                 }
             }
-            .setNegativeButton("BATAL", null)
+            .setNegativeButton("BATAL") { _, _ ->
+                spinnerKegiatan.setSelection(0)
+            }
+            .setOnCancelListener {
+                spinnerKegiatan.setSelection(0)
+            }
             .show()
     }
 }
