@@ -1,6 +1,7 @@
 package org.hbc.absensihbc
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -31,13 +32,23 @@ class JamCpActivity : AppCompatActivity() {
         edtCp = findViewById(R.id.edtCp)
         lblStatus = findViewById(R.id.lblStatusJamCp)
 
-        // Tombol X → kembali
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
             finish()
         }
 
         loadAnggota()
         loadKegiatan()
+
+        // Listener: kalau pilih "+ Tambah Kegiatan Baru" → muncul dialog
+        spinnerKegiatan.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selected = spinnerKegiatan.selectedItem?.toString() ?: return
+                if (selected == "+ Tambah Kegiatan Baru") {
+                    showTambahKegiatanDialog()
+                }
+            }
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
+        }
 
         findViewById<Button>(R.id.btnSimpanJamCp).setOnClickListener {
             val pos = spinnerAnggota.selectedItemPosition
@@ -51,7 +62,7 @@ class JamCpActivity : AppCompatActivity() {
             val cp = edtCp.text.toString().toIntOrNull() ?: 0
 
             if (kegiatan == "+ Tambah Kegiatan Baru") {
-                showTambahKegiatanDialog()
+                Toast.makeText(this, "Pilih kegiatan dulu", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (jam <= 0 && cp <= 0) {
@@ -110,17 +121,29 @@ class JamCpActivity : AppCompatActivity() {
             .setView(input)
             .setPositiveButton("SIMPAN") { _, _ ->
                 val nama = input.text.toString().trim()
-                if (nama.isEmpty()) return@setPositiveButton
+                if (nama.isEmpty()) {
+                    Toast.makeText(this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                    spinnerKegiatan.setSelection(0)
+                    return@setPositiveButton
+                }
                 ApiClient.tambahKegiatan(nama, "Acara") { json ->
                     runOnUiThread {
                         if (json != null && json.optBoolean("success")) {
-                            Toast.makeText(this, "Ditambahkan", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Kegiatan ditambahkan", Toast.LENGTH_SHORT).show()
                             loadKegiatan()
+                        } else {
+                            Toast.makeText(this, "Gagal: ${json?.optString("message")}", Toast.LENGTH_SHORT).show()
+                            spinnerKegiatan.setSelection(0)
                         }
                     }
                 }
             }
-            .setNegativeButton("BATAL", null)
+            .setNegativeButton("BATAL") { _, _ ->
+                spinnerKegiatan.setSelection(0)
+            }
+            .setOnCancelListener {
+                spinnerKegiatan.setSelection(0)
+            }
             .show()
     }
 }

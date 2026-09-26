@@ -10,7 +10,7 @@
         android:id="@+id/logoSplash"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/ic_launcher_adaptive_fore"
         android:contentDescription="Logo HBC" />
 
     <TextView

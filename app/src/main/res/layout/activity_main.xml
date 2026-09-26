@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@android:drawable/star_big_on"
+                android:src="@mipmap/ic_launcher_adaptive_fore"
                 android:contentDescription="Logo HBC" />
 
             <LinearLayout
