@@ -76,7 +76,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jam magang"
+                android:text="Jam magang (angka bulat)"
                 android:textColor="@color/dark_text_secondary"
                 android:textSize="14sp"
                 android:layout_marginBottom="8dp" />
@@ -85,18 +85,19 @@
                 android:id="@+id/edtJam"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:hint="Contoh: 1.5"
+                android:hint="Contoh: 2"
                 android:textColorHint="@color/dark_text_secondary"
                 android:textColor="@color/dark_text_primary"
                 android:background="@color/dark_surface"
                 android:padding="16dp"
-                android:inputType="numberDecimal"
+                android:inputType="number"
                 android:layout_marginBottom="16dp" />
 
             <TextView
+                android:id="@+id/lblCp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CP"
+                android:text="CP (input manual)"
                 android:textColor="@color/dark_text_secondary"
                 android:textSize="14sp"
                 android:layout_marginBottom="8dp" />

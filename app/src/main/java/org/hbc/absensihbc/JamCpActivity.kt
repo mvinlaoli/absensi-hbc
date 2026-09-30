@@ -19,8 +19,12 @@ class JamCpActivity : AppCompatActivity() {
     private lateinit var edtJam: EditText
     private lateinit var edtCp: EditText
     private lateinit var lblStatus: TextView
+    private lateinit var lblCp: TextView
     private var listAnggota = mutableListOf<JSONObject>()
     private var listKegiatan = mutableListOf<String>()
+
+    // Default CP untuk Latihan HBC
+    private val CP_LATIHAN_HBC = 0.2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +35,7 @@ class JamCpActivity : AppCompatActivity() {
         edtJam = findViewById(R.id.edtJam)
         edtCp = findViewById(R.id.edtCp)
         lblStatus = findViewById(R.id.lblStatusJamCp)
+        lblCp = findViewById(R.id.lblCp)
 
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
             finish()
@@ -39,12 +44,27 @@ class JamCpActivity : AppCompatActivity() {
         loadAnggota()
         loadKegiatan()
 
-        // Listener: kalau pilih "+ Tambah Kegiatan Baru" → muncul dialog
+        // Listener: kalau ganti kegiatan → auto isi CP
         spinnerKegiatan.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selected = spinnerKegiatan.selectedItem?.toString() ?: return
+
                 if (selected == "+ Tambah Kegiatan Baru") {
                     showTambahKegiatanDialog()
+                    return
+                }
+
+                // Auto fill CP kalau Latihan HBC
+                if (selected.equals("Latihan HBC", ignoreCase = true)) {
+                    edtCp.setText(CP_LATIHAN_HBC.toString())
+                    edtCp.isEnabled = false
+                    edtCp.alpha = 0.6f
+                    lblCp.text = "CP (otomatis untuk Latihan HBC)"
+                } else {
+                    edtCp.isEnabled = true
+                    edtCp.alpha = 1.0f
+                    edtCp.setText("")
+                    lblCp.text = "CP (input manual)"
                 }
             }
             override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
@@ -58,20 +78,36 @@ class JamCpActivity : AppCompatActivity() {
             }
             val nim = listAnggota[pos].optString("nim")
             val kegiatan = spinnerKegiatan.selectedItem?.toString() ?: ""
-            val jam = edtJam.text.toString().toDoubleOrNull() ?: 0.0
-            val cp = edtCp.text.toString().toIntOrNull() ?: 0
+
+            // Jam: integer (angka bulat)
+            val jamText = edtJam.text.toString().trim()
+            val jam = if (jamText.isEmpty()) 0 else {
+                val j = jamText.toIntOrNull()
+                if (j == null) {
+                    Toast.makeText(this, "Jam harus angka bulat (tanpa koma)", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                j
+            }
+
+            // CP: untuk Latihan HBC = 0.2 (fixed), Event = manual
+            val cp: Double = if (kegiatan.equals("Latihan HBC", ignoreCase = true)) {
+                CP_LATIHAN_HBC
+            } else {
+                edtCp.text.toString().toDoubleOrNull() ?: 0.0
+            }
 
             if (kegiatan == "+ Tambah Kegiatan Baru") {
                 Toast.makeText(this, "Pilih kegiatan dulu", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (jam <= 0 && cp <= 0) {
-                Toast.makeText(this, "Isi Jam atau CP", Toast.LENGTH_SHORT).show()
+            if (jam <= 0) {
+                Toast.makeText(this, "Isi Jam dulu", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             lblStatus.text = "Menyimpan..."
-            ApiClient.catatJamCp(nim, kegiatan, jam, cp) { json ->
+            ApiClient.catatJamCp(nim, kegiatan, jam.toDouble(), cp.toInt()) { json ->
                 runOnUiThread {
                     lblStatus.text = if (json != null && json.optBoolean("success")) {
                         "✅ ${json.optString("nama")} (+$jam jam, +$cp CP)"
