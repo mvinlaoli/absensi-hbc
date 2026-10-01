@@ -19,9 +19,6 @@ class MainActivity : AppCompatActivity() {
         findViewById<CardView>(R.id.cardManual).setOnClickListener {
             startActivity(Intent(this, ManualActivity::class.java))
         }
-        findViewById<CardView>(R.id.cardJamCp).setOnClickListener {
-            startActivity(Intent(this, JamCpActivity::class.java))
-        }
 
         findViewById<ImageButton>(R.id.btnRekap).setOnClickListener {
             val url = "https://docs.google.com/spreadsheets/d/1nYchu61_ZknF8Ve3RvLRaNf1kMCi5x9GWUc8HX2ZvwE/edit"

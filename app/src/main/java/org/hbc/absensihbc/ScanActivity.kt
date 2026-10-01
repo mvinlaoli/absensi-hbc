@@ -2,8 +2,10 @@ package org.hbc.absensihbc
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
@@ -25,30 +27,13 @@ class ScanActivity : AppCompatActivity() {
         spinnerKegiatan = findViewById(R.id.spinnerKegiatan)
         lblStatus = findViewById(R.id.lblStatus)
 
-        // Tombol X → kembali
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
             finish()
         }
 
         loadKegiatan()
 
-        // Ketika dropdown berubah → cek apakah pilih "Tambah Kegiatan Baru"
-        spinnerKegiatan.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
-                val selected = spinnerKegiatan.selectedItem?.toString() ?: return
-                if (selected == "+ Tambah Kegiatan Baru") {
-                    showTambahKegiatanDialog()
-                }
-            }
-            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
-        }
-
         findViewById<Button>(R.id.btnMulaiScan).setOnClickListener {
-            val kegiatan = spinnerKegiatan.selectedItem?.toString() ?: "Latihan HBC"
-            if (kegiatan == "+ Tambah Kegiatan Baru") {
-                Toast.makeText(this, "Pilih kegiatan dulu", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
             IntentIntegrator(this).setOrientationLocked(false).initiateScan()
         }
     }
@@ -79,23 +64,69 @@ class ScanActivity : AppCompatActivity() {
                 return
             }
 
-            lblStatus.text = "Memproses..."
-            ApiClient.catatAbsensi(nim, kegiatan, "Hadir") { json ->
-                runOnUiThread {
-                    lblStatus.text = if (json != null && json.optBoolean("success")) {
-                        "✅ Hadir: ${json.optString("nama")}"
-                    } else {
-                        "❌ Gagal: ${json?.optString("message") ?: "Tidak ada respon"}"
-                    }
-                }
-            }
+            showKonfirmasiDialog(nim, kegiatan)
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
+    private fun showKonfirmasiDialog(nim: String, kegiatan: String) {
+        ApiClient.lookup(nim) { json ->
+            runOnUiThread {
+                if (json == null || !json.optBoolean("success")) {
+                    lblStatus.text = "❌ NIM tidak ditemukan"
+                    return@runOnUiThread
+                }
+
+                val nama = json.optString("nama")
+                val isLatihanHBC = kegiatan.equals("Latihan HBC", ignoreCase = true)
+
+                val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_scan_confirm, null)
+                val lblNama = dialogView.findViewById<TextView>(R.id.lblNamaKonfirmasi)
+                val edtJam = dialogView.findViewById<EditText>(R.id.edtJamKonfirmasi)
+                val edtCp = dialogView.findViewById<EditText>(R.id.edtCpKonfirmasi)
+
+                lblNama.text = "✅ $nama\n$kegiatan"
+
+                if (isLatihanHBC) {
+                    edtJam.setText("2")
+                    edtCp.setText("0.2")
+                } else {
+                    edtJam.setText("")
+                    edtCp.setText("")
+                }
+
+                AlertDialog.Builder(this)
+                    .setTitle("Konfirmasi Kehadiran")
+                    .setView(dialogView)
+                    .setPositiveButton("SIMPAN") { _, _ ->
+                        val jamStr = edtJam.text.toString().trim()
+                        val cpStr = edtCp.text.toString().trim()
+
+                        if (jamStr.isNotEmpty() && jamStr.toIntOrNull() == null) {
+                            Toast.makeText(this, "Jam harus angka bulat", Toast.LENGTH_SHORT).show()
+                            return@setPositiveButton
+                        }
+
+                        lblStatus.text = "Menyimpan..."
+                        ApiClient.catatAbsensi(nim, kegiatan, "Hadir", "", jamStr, cpStr) { resp ->
+                            runOnUiThread {
+                                lblStatus.text = if (resp != null && resp.optBoolean("success")) {
+                                    "✅ Hadir: ${resp.optString("nama")}"
+                                } else {
+                                    "❌ Gagal: ${resp?.optString("message") ?: "Tidak ada respon"}"
+                                }
+                            }
+                        }
+                    }
+                    .setNegativeButton("BATAL", null)
+                    .show()
+            }
+        }
+    }
+
     private fun showTambahKegiatanDialog() {
-        val input = android.widget.EditText(this)
+        val input = EditText(this)
         input.hint = "Nama kegiatan baru"
 
         AlertDialog.Builder(this)
@@ -104,8 +135,6 @@ class ScanActivity : AppCompatActivity() {
             .setPositiveButton("SIMPAN") { _, _ ->
                 val nama = input.text.toString().trim()
                 if (nama.isEmpty()) {
-                    Toast.makeText(this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
-                    // Reset ke default
                     spinnerKegiatan.setSelection(0)
                     return@setPositiveButton
                 }
@@ -113,21 +142,13 @@ class ScanActivity : AppCompatActivity() {
                     runOnUiThread {
                         if (json != null && json.optBoolean("success")) {
                             Toast.makeText(this, "Kegiatan ditambahkan", Toast.LENGTH_SHORT).show()
-                            // Reload dropdown — kegiatan baru akan muncul
                             loadKegiatan()
-                        } else {
-                            Toast.makeText(this, "Gagal: ${json?.optString("message")}", Toast.LENGTH_SHORT).show()
-                            spinnerKegiatan.setSelection(0)
                         }
                     }
                 }
             }
-            .setNegativeButton("BATAL") { _, _ ->
-                spinnerKegiatan.setSelection(0)
-            }
-            .setOnCancelListener {
-                spinnerKegiatan.setSelection(0)
-            }
+            .setNegativeButton("BATAL") { _, _ -> spinnerKegiatan.setSelection(0) }
+            .setOnCancelListener { spinnerKegiatan.setSelection(0) }
             .show()
     }
 }

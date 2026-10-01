@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/lblNamaKonfirmasi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama\nKegiatan"
+        android:textColor="@color/dark_text_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jam Magang"
+        android:textColor="@color/dark_text_secondary"
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/edtJamKonfirmasi"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:hint="Contoh: 2"
+        android:textColorHint="@color/dark_text_secondary"
+        android:textColor="@color/dark_text_primary"
+        android:background="@color/dark_surface"
+        android:padding="16dp"
+        android:inputType="number"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CP"
+        android:textColor="@color/dark_text_secondary"
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/edtCpKonfirmasi"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:hint="Contoh: 0.2"
+        android:textColorHint="@color/dark_text_secondary"
+        android:textColor="@color/dark_text_primary"
+        android:background="@color/dark_surface"
+        android:padding="16dp"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="8dp" />
+
+</LinearLayout>

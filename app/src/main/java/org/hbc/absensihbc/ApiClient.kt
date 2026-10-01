@@ -64,9 +64,20 @@ object ApiClient {
         })
     }
 
-    // ---------- BARU: STATISTIK BULANAN ----------
     fun statistikBulanan(onResult: (JSONObject?) -> Unit) {
         val url = "$BASE_URL?action=statistikBulanan&secret=$API_SECRET"
+        client.newCall(Request.Builder().url(url).build()).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) = onResult(null)
+            override fun onResponse(call: Call, response: Response) {
+                val text = response.body?.string()
+                val json = try { if (text != null) JSONObject(text) else null } catch (ex: Exception) { null }
+                onResult(json)
+            }
+        })
+    }
+
+    fun lookup(nim: String, onResult: (JSONObject?) -> Unit) {
+        val url = "$BASE_URL?action=lookup&nim=$nim&secret=$API_SECRET"
         client.newCall(Request.Builder().url(url).build()).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) = onResult(null)
             override fun onResponse(call: Call, response: Response) {
@@ -88,27 +99,25 @@ object ApiClient {
         )
     }
 
-    fun catatAbsensi(nim: String, jenisKegiatan: String, status: String, onResult: (JSONObject?) -> Unit) {
+    fun catatAbsensi(
+        nim: String,
+        jenisKegiatan: String,
+        status: String,
+        tanggalManual: String,
+        jamManual: String,
+        cpManual: String,
+        onResult: (JSONObject?) -> Unit
+    ) {
         postForm(
             mapOf(
                 "secret" to API_SECRET,
                 "action" to "absensi",
                 "nim" to nim,
                 "jenisKegiatan" to jenisKegiatan,
-                "status" to status
-            ), onResult
-        )
-    }
-
-    fun catatJamCp(nim: String, jenisKegiatan: String, jam: Double, cp: Int, onResult: (JSONObject?) -> Unit) {
-        postForm(
-            mapOf(
-                "secret" to API_SECRET,
-                "action" to "jamCp",
-                "nim" to nim,
-                "jenisKegiatan" to jenisKegiatan,
-                "jamMagang" to jam.toString(),
-                "cp" to cp.toString()
+                "status" to status,
+                "tanggalManual" to tanggalManual,
+                "jamManual" to jamManual,
+                "cpManual" to cpManual
             ), onResult
         )
     }
